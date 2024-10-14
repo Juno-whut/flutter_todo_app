@@ -42,7 +42,8 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
-# the linux web and windows folders
+# the linux web macos and windows folders
 .windows/
 .web/
 .linux/
+.macos/
