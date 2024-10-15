@@ -35,7 +35,32 @@ class _HomepageState extends State<Homepage> {
             taskCompleted: todolist[index][1],
             onChanged: (value) => checkboxChanged(index),
           );
-        })
+        }),
+        floatingActionButton: Row(
+          children: [
+            Expanded(child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: TextField(
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Colors.deepPurple.shade200,
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(color: Colors.white),
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(color: Colors.deepPurple),
+                    borderRadius: BorderRadius.circular(15),
+                  )
+                )
+              ),
+            )),
+            FloatingActionButton(
+              onPressed: () {},
+              child: const Icon(Icons.add),
+            ),
+          ],
+        ),
       );
     }
 }
