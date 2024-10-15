@@ -43,7 +43,7 @@ app.*.map.json
 /android/app/release
 
 # the linux web macos and windows folders
-windows/
-web/
-linux/
-macos/
+.windows/
+.web/
+.linux/
+.macos/
