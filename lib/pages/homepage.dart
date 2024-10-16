@@ -9,6 +9,8 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
+
+    final _controller = TextEditingController();
     List todolist = [
       ['Learn Andriod Development', false],
       ['Learn Web Development', false],
@@ -17,6 +19,19 @@ class _HomepageState extends State<Homepage> {
     void checkboxChanged(int index) {
       setState(() {
         todolist[index][1] = !todolist[index][1];
+      });
+    }
+
+    void saveNewTask() {
+      setState(() {
+        todolist.add([_controller.text, false]);
+        _controller.clear();
+      });
+    }
+
+    void deleteTask(int index) {
+      setState(() {
+        todolist.removeAt(index);
       });
     }
 
@@ -34,32 +49,38 @@ class _HomepageState extends State<Homepage> {
             taskName: todolist[index][0],
             taskCompleted: todolist[index][1],
             onChanged: (value) => checkboxChanged(index),
+            deleteFunction: (value) => deleteTask(index),
           );
         }),
-        floatingActionButton: Row(
-          children: [
-            Expanded(child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: TextField(
-                decoration: InputDecoration(
-                  filled: true,
-                  fillColor: Colors.deepPurple.shade200,
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(color: Colors.white),
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(color: Colors.deepPurple),
-                    borderRadius: BorderRadius.circular(15),
+        floatingActionButton: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15),
+          child: Row(
+            children: [
+              Expanded(child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: TextField(
+                  controller: _controller,
+                  decoration: InputDecoration(
+                    hintText: 'Add New Task',
+                    filled: true,
+                    fillColor: Colors.deepPurple.shade200,
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(color: Colors.white),
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(color: Colors.deepPurple),
+                      borderRadius: BorderRadius.circular(15),
+                    )
                   )
-                )
+                ),
+              )),
+              FloatingActionButton(
+                onPressed: saveNewTask,
+                child: const Icon(Icons.add),
               ),
-            )),
-            FloatingActionButton(
-              onPressed: () {},
-              child: const Icon(Icons.add),
-            ),
-          ],
+            ],
+          ),
         ),
       );
     }
